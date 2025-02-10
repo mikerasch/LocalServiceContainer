@@ -6,7 +6,6 @@ import com.michael.container.registry.model.RegisterServiceResponse;
 import com.michael.container.registry.model.RemoveServiceRequest;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +13,10 @@ import org.springframework.stereotype.Service;
 public class ServiceRegistryService {
   private final ConversionService conversionService;
   private final CrudRegistry crudRegistry;
-  private final ApplicationEventPublisher eventPublisher;
 
-  public ServiceRegistryService(
-      ConversionService conversionService,
-      CrudRegistry crudRegistry,
-      ApplicationEventPublisher eventPublisher) {
+  public ServiceRegistryService(ConversionService conversionService, CrudRegistry crudRegistry) {
     this.conversionService = conversionService;
     this.crudRegistry = crudRegistry;
-    this.eventPublisher = eventPublisher;
   }
 
   public void registerService(RegisterServiceRequest registerServiceRequest) {

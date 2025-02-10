@@ -1,17 +1,22 @@
 package com.michael.container.registry.cache.crud;
 
 import com.michael.container.registry.cache.RegistryCache;
+import com.michael.container.registry.model.DeregisterEvent;
 import com.michael.container.registry.model.DurationValue;
+import com.michael.container.registry.model.RegisterEvent;
 import com.michael.container.registry.model.RegisterServiceResponse;
 import java.util.*;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CrudRegistry {
   private final RegistryCache registryCache;
+  private final ApplicationEventPublisher eventPublisher;
 
-  public CrudRegistry(RegistryCache registryCache) {
+  public CrudRegistry(RegistryCache registryCache, ApplicationEventPublisher eventPublisher) {
     this.registryCache = registryCache;
+    this.eventPublisher = eventPublisher;
   }
 
   public void insert(RegisterServiceResponse registerServiceResponse) {
@@ -32,10 +37,16 @@ public class CrudRegistry {
                 Map.of(
                     registerServiceResponse,
                     new DurationValue(RegistryCache.generateNewExpiration()))));
+    eventPublisher.publishEvent(
+        new RegisterEvent(
+            registerServiceResponse.applicationName(),
+            registerServiceResponse.ip(),
+            registerServiceResponse.applicationVersion(),
+            registerServiceResponse.port()));
   }
 
   public Map<String, Map<RegisterServiceResponse, DurationValue>> fetchAll() {
-    return new HashMap<>(registryCache.getRegisterServiceResponseSet());
+    return new HashMap<>(registryCache.getApplicationToRegisterServiceMap());
   }
 
   public Optional<RegisterServiceResponse> findOne(
@@ -58,9 +69,10 @@ public class CrudRegistry {
                 entry.getKey().ip().equals(ip)
                     && entry.getKey().port() == port
                     && entry.getKey().applicationVersion() == applicationVersion);
+    eventPublisher.publishEvent(new DeregisterEvent(applicationName, ip, applicationVersion, port));
   }
 
   private Map<String, Map<RegisterServiceResponse, DurationValue>> getCache() {
-    return registryCache.getRegisterServiceResponseSet();
+    return registryCache.getApplicationToRegisterServiceMap();
   }
 }

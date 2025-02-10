@@ -12,14 +12,16 @@ import org.springframework.stereotype.Service;
 public class RegistryCache {
   private static final Duration REGISTRATION_EXPIRATION_DURATION = Duration.ofMinutes(2L);
 
-  private final Map<String, Map<RegisterServiceResponse, DurationValue>> registerServiceResponseSet;
+  private final Map<String, Map<RegisterServiceResponse, DurationValue>>
+      applicationToRegisterServiceMap;
 
   public RegistryCache() {
-    registerServiceResponseSet = new ConcurrentHashMap<>();
+    applicationToRegisterServiceMap = new ConcurrentHashMap<>();
   }
 
-  public Map<String, Map<RegisterServiceResponse, DurationValue>> getRegisterServiceResponseSet() {
-    return registerServiceResponseSet;
+  public Map<String, Map<RegisterServiceResponse, DurationValue>>
+      getApplicationToRegisterServiceMap() {
+    return applicationToRegisterServiceMap;
   }
 
   public static Instant generateNewExpiration() {

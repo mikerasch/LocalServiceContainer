@@ -10,17 +10,20 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.ApplicationEventPublisher;
 
 @ExtendWith(MockitoExtension.class)
 class CrudRegistryTest {
   CrudRegistry crudRegistry;
   RegistryCache registryCache;
+  @Mock ApplicationEventPublisher eventPublisher;
 
   @BeforeEach
   void setup() {
     registryCache = new RegistryCache();
-    crudRegistry = new CrudRegistry(registryCache);
+    crudRegistry = new CrudRegistry(registryCache, eventPublisher);
   }
 
   @Test
@@ -32,7 +35,7 @@ class CrudRegistryTest {
     crudRegistry.insert(registerServiceResponse);
 
     Assertions.assertTrue(
-        registryCache.getRegisterServiceResponseSet().values().stream()
+        registryCache.getApplicationToRegisterServiceMap().values().stream()
             .flatMap(x -> x.keySet().stream())
             .collect(Collectors.toSet())
             .contains(registerServiceResponse));

@@ -2,10 +2,7 @@ package com.michael.container.registry.service;
 
 import com.michael.container.registry.cache.crud.CrudRegistry;
 import com.michael.container.registry.mapper.RegisterServiceRequestToRegisterServiceResponseMapper;
-import com.michael.container.registry.model.DurationValue;
-import com.michael.container.registry.model.RegisterServiceRequest;
-import com.michael.container.registry.model.RegisterServiceResponse;
-import com.michael.container.registry.model.RemoveServiceRequest;
+import com.michael.container.registry.model.*;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,7 +26,7 @@ class ServiceRegistryServiceTest {
     var converter = new ApplicationConversionService();
     converter.addConverter(new RegisterServiceRequestToRegisterServiceResponseMapper());
 
-    registryService = new ServiceRegistryService(converter, crudRegistry, null);
+    registryService = new ServiceRegistryService(converter, crudRegistry);
   }
 
   @Test

@@ -163,8 +163,8 @@ class SingleServiceTestSuite {
   @Test
   void registerService_SuccessfulRegistration_HealthCheckPasses_KeepRegistered() {
     RegisterServiceRequest registerServiceRequest =
-            new RegisterServiceRequest(
-                    "first-service", 1, wireMockUrl, wireMockPort, new HashSet<>(), new HashMap<>());
+        new RegisterServiceRequest(
+            "first-service", 1, wireMockUrl, wireMockPort, new HashSet<>(), new HashMap<>());
 
     stubFor(get(urlEqualTo("/health")).willReturn(aResponse().withStatus(200)));
 

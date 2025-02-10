@@ -6,8 +6,10 @@ import com.michael.container.registry.model.DurationValue;
 import com.michael.container.registry.model.RegisterEvent;
 import com.michael.container.registry.model.RegisterServiceResponse;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 @Component
 public class CrudRegistry {
@@ -62,13 +64,16 @@ public class CrudRegistry {
 
   public void remove(String applicationName, String ip, int applicationVersion, int port) {
     getCache()
-        .getOrDefault(applicationName, new HashMap<>())
+        .getOrDefault(applicationName, new ConcurrentHashMap<>())
         .entrySet()
         .removeIf(
             entry ->
                 entry.getKey().ip().equals(ip)
                     && entry.getKey().port() == port
                     && entry.getKey().applicationVersion() == applicationVersion);
+    if (CollectionUtils.isEmpty(getCache().get(applicationName))) {
+      getCache().remove(applicationName);
+    }
     eventPublisher.publishEvent(new DeregisterEvent(applicationName, ip, applicationVersion, port));
   }
 

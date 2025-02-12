@@ -1,6 +1,10 @@
 package com.michael.container.heartbeat.model;
 
 import com.michael.container.validation.annotation.HttpUrl;
+import jakarta.validation.constraints.NotNull;
 
 public record HeartbeatRequest(
-    String applicationName, @HttpUrl String url, int port, int applicationVersion) {}
+    @NotNull String applicationName,
+    @HttpUrl @NotNull String url,
+    @NotNull int port,
+    @NotNull int applicationVersion) {}

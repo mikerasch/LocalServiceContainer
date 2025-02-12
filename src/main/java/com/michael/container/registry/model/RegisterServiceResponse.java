@@ -1,13 +1,14 @@
 package com.michael.container.registry.model;
 
 import com.michael.container.registry.enums.Tag;
+import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.Set;
 
 public record RegisterServiceResponse(
-    String applicationName,
-    int applicationVersion,
-    String url,
-    int port,
-    Set<String> dependsOn,
-    Map<Tag, String> metaData) {}
+    @NotNull String applicationName,
+    @NotNull int applicationVersion,
+    @NotNull String url,
+    @NotNull int port,
+    @NotNull Set<String> dependsOn,
+    @NotNull Map<Tag, String> metaData) {}

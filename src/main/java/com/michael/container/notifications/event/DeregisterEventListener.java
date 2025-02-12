@@ -24,7 +24,7 @@ public class DeregisterEventListener {
         new ServiceNotificationRequest(
             NotificationType.SERVICE_DEREGISTERED,
             event.applicationName(),
-            event.ip(),
+            event.url(),
             event.version(),
             event.port()));
   }

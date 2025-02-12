@@ -23,7 +23,7 @@ public class RegistryExpirationRoutine {
               var registerService = expiredEntry.getKey();
               crudRegistry.remove(
                   registerService.applicationName(),
-                  registerService.ip(),
+                  registerService.url(),
                   registerService.applicationVersion(),
                   registerService.port());
             });

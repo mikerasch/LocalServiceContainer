@@ -41,7 +41,7 @@ public abstract class NotificationService {
         .forEach(
             serviceToBeNotified -> {
               String url =
-                  NOTIFICATION_URL.formatted(serviceToBeNotified.ip(), serviceToBeNotified.port());
+                  NOTIFICATION_URL.formatted(serviceToBeNotified.url(), serviceToBeNotified.port());
               sendNotification(url, serviceNotificationRequest);
             });
   }

@@ -42,7 +42,7 @@ public class CrudRegistry {
     eventPublisher.publishEvent(
         new RegisterEvent(
             registerServiceResponse.applicationName(),
-            registerServiceResponse.ip(),
+            registerServiceResponse.url(),
             registerServiceResponse.applicationVersion(),
             registerServiceResponse.port()));
   }
@@ -56,25 +56,26 @@ public class CrudRegistry {
     return getCache().getOrDefault(applicationName, new HashMap<>()).keySet().stream()
         .filter(
             serviceResponse ->
-                serviceResponse.ip().equals(url)
+                serviceResponse.url().equals(url)
                     && serviceResponse.port() == port
                     && serviceResponse.applicationVersion() == version)
         .findFirst();
   }
 
-  public void remove(String applicationName, String ip, int applicationVersion, int port) {
+  public void remove(String applicationName, String url, int applicationVersion, int port) {
     getCache()
         .getOrDefault(applicationName, new ConcurrentHashMap<>())
         .entrySet()
         .removeIf(
             entry ->
-                entry.getKey().ip().equals(ip)
+                entry.getKey().url().equals(url)
                     && entry.getKey().port() == port
                     && entry.getKey().applicationVersion() == applicationVersion);
     if (CollectionUtils.isEmpty(getCache().get(applicationName))) {
       getCache().remove(applicationName);
     }
-    eventPublisher.publishEvent(new DeregisterEvent(applicationName, ip, applicationVersion, port));
+    eventPublisher.publishEvent(
+        new DeregisterEvent(applicationName, url, applicationVersion, port));
   }
 
   private Map<String, Map<RegisterServiceResponse, DurationValue>> getCache() {

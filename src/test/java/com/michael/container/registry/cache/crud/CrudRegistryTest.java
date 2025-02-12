@@ -82,7 +82,7 @@ class CrudRegistryTest {
 
     Assertions.assertAll(
         () -> Assertions.assertNotNull(response),
-        () -> Assertions.assertEquals("test", response.ip()),
+        () -> Assertions.assertEquals("test", response.url()),
         () -> Assertions.assertEquals(9090, response.port()));
   }
 
@@ -105,11 +105,11 @@ class CrudRegistryTest {
   void remove_WithResponse() {
     var registerServiceResponse =
         new RegisterServiceResponse(
-            "applicationName", 1, "ip", 9090, new HashSet<>(), new HashMap<>());
+            "applicationName", 1, "url", 9090, new HashSet<>(), new HashMap<>());
 
     crudRegistry.remove(
         registerServiceResponse.applicationName(),
-        registerServiceResponse.ip(),
+        registerServiceResponse.url(),
         registerServiceResponse.applicationVersion(),
         registerServiceResponse.port());
 

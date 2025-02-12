@@ -20,7 +20,7 @@ public class HeartbeatService {
         crudRegistry
             .findOne(
                 heartbeatRequest.applicationName(),
-                heartbeatRequest.ip(),
+                heartbeatRequest.url(),
                 heartbeatRequest.port(),
                 heartbeatRequest.applicationVersion())
             .orElse(null);

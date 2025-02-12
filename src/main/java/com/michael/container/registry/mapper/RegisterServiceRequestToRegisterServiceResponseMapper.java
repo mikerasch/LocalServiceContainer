@@ -15,7 +15,7 @@ public class RegisterServiceRequestToRegisterServiceResponseMapper
     return new RegisterServiceResponse(
         source.applicationName(),
         source.applicationVersion(),
-        source.ip(),
+        source.url(),
         source.port(),
         source.dependsOn() == null ? new HashSet<>() : source.dependsOn(),
         source.metaData() == null ? new HashMap<>() : source.metaData());

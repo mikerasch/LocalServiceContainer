@@ -37,7 +37,7 @@ class RegistryExpirationRoutineTest {
   void expirationRoutineCheck_RemovesAllExpiredRecords() {
     RegisterServiceResponse response1 =
         new RegisterServiceResponse(
-            "applicationName", 1, "ip", 8080, new HashSet<>(), new HashMap<>());
+            "applicationName", 1, "url", 8080, new HashSet<>(), new HashMap<>());
     RegisterServiceResponse response2 =
         new RegisterServiceResponse(
             "otherApplicationName", 1, "otherhost", 9090, new HashSet<>(), new HashMap<>());

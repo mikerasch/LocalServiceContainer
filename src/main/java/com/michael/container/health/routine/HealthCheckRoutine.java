@@ -34,7 +34,7 @@ public class HealthCheckRoutine {
         .forEach(
             serviceResponse -> {
               String healthCheckUrl =
-                  HEALTH_CHECK_URL.formatted(serviceResponse.ip(), serviceResponse.port());
+                  HEALTH_CHECK_URL.formatted(serviceResponse.url(), serviceResponse.port());
               try {
                 healthCheckClient.checkHealth(healthCheckUrl);
               } catch (HealthCheckInvalidException healthCheckInvalidException) {
@@ -45,7 +45,7 @@ public class HealthCheckRoutine {
                 registryService.removeService(
                     new RemoveServiceRequest(
                         serviceResponse.applicationName(),
-                        serviceResponse.ip(),
+                        serviceResponse.url(),
                         serviceResponse.applicationVersion(),
                         serviceResponse.port()));
               }

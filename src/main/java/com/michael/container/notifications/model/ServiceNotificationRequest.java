@@ -5,6 +5,6 @@ import com.michael.container.notifications.enums.NotificationType;
 public record ServiceNotificationRequest(
     NotificationType notificationType,
     String applicationName,
-    String ip,
+    String url,
     int applicationVersion,
     int port) {}

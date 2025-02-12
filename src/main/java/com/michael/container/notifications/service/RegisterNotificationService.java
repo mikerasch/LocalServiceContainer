@@ -33,7 +33,7 @@ public class RegisterNotificationService extends NotificationService {
         crudRegistry
             .findOne(
                 serviceNotificationRequest.applicationName(),
-                serviceNotificationRequest.ip(),
+                serviceNotificationRequest.url(),
                 serviceNotificationRequest.port(),
                 serviceNotificationRequest.applicationVersion())
             .orElseThrow();
@@ -80,7 +80,7 @@ public class RegisterNotificationService extends NotificationService {
 
     String url =
         NOTIFICATION_URL.formatted(
-            serviceNotificationRequest.ip(), serviceNotificationRequest.port());
+            serviceNotificationRequest.url(), serviceNotificationRequest.port());
 
     mapOfDependencies.keySet().parallelStream()
         .forEach(registerServiceResponse -> sendNotification(url, serviceNotificationRequest));

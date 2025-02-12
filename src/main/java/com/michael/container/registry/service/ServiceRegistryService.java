@@ -36,7 +36,7 @@ public class ServiceRegistryService {
   public void removeService(RemoveServiceRequest removeServiceRequest) {
     crudRegistry.remove(
         removeServiceRequest.applicationName(),
-        removeServiceRequest.ip(),
+        removeServiceRequest.url(),
         removeServiceRequest.version(),
         removeServiceRequest.port());
   }

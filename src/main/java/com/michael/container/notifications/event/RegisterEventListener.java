@@ -23,7 +23,7 @@ public class RegisterEventListener {
         new ServiceNotificationRequest(
             NotificationType.SERVICE_REGISTERED,
             event.applicationName(),
-            event.ip(),
+            event.url(),
             event.version(),
             event.port()));
   }

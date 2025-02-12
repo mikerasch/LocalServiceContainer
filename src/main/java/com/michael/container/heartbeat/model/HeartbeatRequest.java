@@ -1,4 +1,6 @@
 package com.michael.container.heartbeat.model;
 
+import com.michael.container.validation.annotation.HttpUrl;
+
 public record HeartbeatRequest(
-    String applicationName, String url, int port, int applicationVersion) {}
+    String applicationName, @HttpUrl String url, int port, int applicationVersion) {}

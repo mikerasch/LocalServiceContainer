@@ -3,6 +3,7 @@ package com.michael.container.heartbeat.controller;
 import com.michael.container.heartbeat.model.HeartbeatRequest;
 import com.michael.container.heartbeat.model.HeartbeatResponse;
 import com.michael.container.heartbeat.service.HeartbeatService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class HeartbeatController {
   }
 
   @PostMapping
-  public HeartbeatResponse heartbeat(@RequestBody HeartbeatRequest heartbeatRequest) {
+  public HeartbeatResponse heartbeat(@RequestBody @Valid HeartbeatRequest heartbeatRequest) {
     return heartbeatService.heartbeat(heartbeatRequest);
   }
 }

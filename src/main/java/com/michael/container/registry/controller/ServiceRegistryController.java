@@ -4,6 +4,7 @@ import com.michael.container.registry.model.RegisterServiceRequest;
 import com.michael.container.registry.model.RegisterServiceResponse;
 import com.michael.container.registry.model.RemoveServiceRequest;
 import com.michael.container.registry.service.ServiceRegistryService;
+import jakarta.validation.Valid;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class ServiceRegistryController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void registerService(@RequestBody RegisterServiceRequest registerServiceRequest) {
+  public void registerService(@RequestBody @Valid RegisterServiceRequest registerServiceRequest) {
     registryService.registerService(registerServiceRequest);
   }
 
@@ -31,7 +32,7 @@ public class ServiceRegistryController {
 
   @DeleteMapping
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deregisterService(@RequestBody RemoveServiceRequest deregisterRequest) {
+  public void deregisterService(@RequestBody @Valid RemoveServiceRequest deregisterRequest) {
     registryService.removeService(deregisterRequest);
   }
 }

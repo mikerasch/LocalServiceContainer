@@ -1,3 +1,6 @@
 package com.michael.container.registry.model;
 
-public record RemoveServiceRequest(String applicationName, String url, int version, int port) {}
+import com.michael.container.validation.annotation.HttpUrl;
+
+public record RemoveServiceRequest(
+    String applicationName, @HttpUrl String url, int version, int port) {}

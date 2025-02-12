@@ -33,7 +33,8 @@ class HeartbeatControllerTest {
 
   @Test
   void heartbeat_Success() throws Exception {
-    HeartbeatRequest request = new HeartbeatRequest("application-name", "http://somehostName.com", 8080, 1);
+    HeartbeatRequest request =
+        new HeartbeatRequest("application-name", "http://somehostName.com", 8080, 1);
 
     mockMvc
         .perform(

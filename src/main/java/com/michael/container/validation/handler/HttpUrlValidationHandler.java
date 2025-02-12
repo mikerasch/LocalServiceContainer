@@ -18,6 +18,9 @@ public class HttpUrlValidationHandler implements ConstraintValidator<HttpUrl, St
   @Override
   public boolean isValid(String url, ConstraintValidatorContext constraintValidatorContext) {
     try {
+      if (StringUtils.isEmpty(url)) {
+        return false;
+      }
       var uri = new URI(url);
       return Stream.of(() -> checkScheme(uri), (Supplier<Boolean>) () -> checkPort(uri))
           .allMatch(Supplier::get);

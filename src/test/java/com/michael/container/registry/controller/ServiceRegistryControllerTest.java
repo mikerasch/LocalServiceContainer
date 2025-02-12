@@ -43,7 +43,12 @@ class ServiceRegistryControllerTest {
                 .content(
                     objectMapper.writeValueAsString(
                         new RegisterServiceRequest(
-                            "applicationName", 1, "http://google.com", 8080, new HashSet<>(), new HashMap<>()))))
+                            "applicationName",
+                            1,
+                            "http://google.com",
+                            8080,
+                            new HashSet<>(),
+                            new HashMap<>()))))
         .andExpect(status().isNoContent());
 
     Mockito.verify(registryService).registerService(Mockito.any());

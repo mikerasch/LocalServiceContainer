@@ -1,5 +1,6 @@
 package com.michael.container.registry.model;
 
+import com.michael.container.registry.enums.Tag;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,4 +10,4 @@ public record RegisterServiceResponse(
     String url,
     int port,
     Set<String> dependsOn,
-    Map<String, String> metaData) {}
+    Map<Tag, String> metaData) {}

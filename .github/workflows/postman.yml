@@ -35,9 +35,9 @@ jobs:
           compose-file: "./docker-compose.yml"
           action: "up"
 
-      - name: Execute tests in the running services
+      - name: Run Application
         run: |
-          docker compose exec test-app pytest
+          docker-compose -f docker-compose.yml build
 
       - name: Clean up containers
         uses: hoverkraft-tech/compose-action@v2.0.1

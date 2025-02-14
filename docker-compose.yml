@@ -9,6 +9,12 @@ services:
       - "9095:9095"
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9095/service-registry/api/v1/actuator/health"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
 
   newman:
     image: postman/newman:alpine
@@ -17,6 +23,9 @@ services:
       - ./postman/collection/collection.json:/etc/newman/collection.json
     networks:
       - app-network
+    depends_on:
+      springboot-app:
+        condition: service_healthy
     command: run /etc/newman/collection.json --environment /etc/newman/environment.json
 
 networks:

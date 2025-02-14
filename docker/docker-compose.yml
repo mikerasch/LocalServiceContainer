@@ -3,7 +3,7 @@ version: '3.8'
 services:
   springboot-app:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     ports:
       - "9095:9095"

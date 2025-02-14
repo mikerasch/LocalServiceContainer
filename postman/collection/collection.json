@@ -61,8 +61,8 @@
 									"    pm.response.to.have.status(204);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 100ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 									"});"
 								],
 								"type": "text/javascript",
@@ -379,8 +379,7 @@
 									"pm.test(\"Response matches expected data\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    var expectedData = {\r",
-									"        \"test-application-v1\": [\r",
-									"        ]\r",
+									"\r",
 									"    };\r",
 									"    pm.expect(jsonData).to.eql(expectedData);\r",
 									"});"

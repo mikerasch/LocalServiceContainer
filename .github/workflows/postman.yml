@@ -33,7 +33,7 @@ jobs:
 
       - name: Build and start Spring Boot app
         run: |
-          docker-compose -f docker-compose.yml up -d springboot-app
+          docker compose -f docker-compose.yml up -d springboot-app
 
       - name: Wait for Spring Boot app to be ready
         run: |
@@ -42,7 +42,7 @@ jobs:
 
       - name: Run Postman tests with Newman
         run: |
-          docker-compose -f docker-compose.yml run newman
+          docker compose -f docker-compose.yml run newman
 
       - name: Clean up containers
         uses: hoverkraft-tech/compose-action@v2.0.1

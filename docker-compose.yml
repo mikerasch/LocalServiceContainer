@@ -1,8 +1,8 @@
 services:
   service-registry:
     build:
-      context: ..
-      dockerfile: /LocalServiceContainer/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "9095:9095"
     networks:

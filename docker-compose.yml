@@ -10,6 +10,15 @@ services:
     networks:
       - app-network
 
+  newman:
+    image: postman/newman:alpine
+    volumes:
+      - ./postman/environment/env.json:/etc/newman/environment.json
+      - ./postman/collection/collection.json:/etc/newman/collection.json
+    networks:
+      - app-network
+    command: run /etc/newman/collection.json --environment /etc/newman/environment.json
+
 networks:
   app-network:
     driver: bridge

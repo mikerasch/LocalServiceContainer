@@ -21,9 +21,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build Spring Boot application
+      - name: Build Spring Boot application With Tests
         run: |
-          mvn clean package -DskipTests
+          mvn clean package
 
       - name: Run Docker Compose
         uses: hoverkraft-tech/compose-action@v2.0.1
@@ -31,7 +31,7 @@ jobs:
           compose-file: "./docker-compose.yml"
           action: "up"
 
-      - name: Run Application
+      - name: Run Application With Postman Tests
         run: |
           docker compose -f docker-compose.yml up --build --exit-code-from newman
 
